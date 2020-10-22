@@ -4,6 +4,7 @@ import com.thoughtworks.capability.gtb.restfulapidesign.dataprovider.DataProvide
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Team;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -12,9 +13,9 @@ public class TeamRepository {
     private final List<Team> teamList = DataProvider.getTeams();
 
     public List<Team> initTeams() {
-        return DataProvider.getTeams();
+        teamList.forEach(team -> team.setStudents(new ArrayList<>()));
+        return teamList;
     }
-
 
     public Team findById(int teamId) {
         return teamList.stream().filter(team -> team.getId() == teamId).findFirst().orElse(null);

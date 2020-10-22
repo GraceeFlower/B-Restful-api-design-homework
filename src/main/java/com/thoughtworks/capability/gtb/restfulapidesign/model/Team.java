@@ -14,5 +14,5 @@ public class Team {
     private int id;
     private String name;
     private String note;
-    private List<Student> student;
+    private List<Student> students;
 }

@@ -30,12 +30,8 @@ public class TeamController {
         List<Student> students = studentService.findAll();
         Collections.shuffle(students);
         List<Team> teams = teamService.initTeams();
-
-        for (int stuIndex = 0,teamIndex = 0; stuIndex<students.size(); stuIndex++, teamIndex++) {
-            if(teamIndex == 6) {
-                teamIndex = 0;
-            }
-            teams.get(teamIndex).getStudent().add(students.get(stuIndex));
+        for (int stuIndex = 0; stuIndex < students.size(); stuIndex++) {
+            teams.get(stuIndex % teams.size()).getStudents().add(students.get(stuIndex));
         }
         return teams;
     }
