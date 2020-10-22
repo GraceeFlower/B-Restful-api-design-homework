@@ -35,6 +35,10 @@ public class StudentService {
         studentRepository.updateStudent(student);
     }
 
+    public List<Student> findAll() {
+        return studentRepository.findAll();
+    }
+
     public List<Student> findByGender(Gender gender) {
         List<Student> studentList = studentRepository.findByGender(gender);
         if (studentList.size() == 0) {
