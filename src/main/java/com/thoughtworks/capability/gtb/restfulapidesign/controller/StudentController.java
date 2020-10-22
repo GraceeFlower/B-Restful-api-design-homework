@@ -34,7 +34,10 @@ public class StudentController {
     }
 
     @GetMapping("/students")
-    public List<Student> getAllStudents(@RequestParam(name = "gender") Gender gender) {
+    public List<Student> getAllStudents(@RequestParam(name = "gender", required = false) Gender gender) {
+        if (gender == null) {
+            return studentService.findAll();
+        }
         return studentService.findByGender(gender);
     }
 

@@ -1,13 +1,12 @@
 package com.thoughtworks.capability.gtb.restfulapidesign.model;
 
-import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum Gender {
-    MALE("male"), FEMALE("female");
+    MALE, FEMALE;
 
-    private String gender;
-
-    Gender(String gender) {
-        this.gender = gender;
+    @JsonValue
+    public int getOrdinal() {
+        return ordinal();
     }
 }
