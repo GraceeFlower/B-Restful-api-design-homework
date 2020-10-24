@@ -9,6 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TeamUpdateRequestDTO {
-    private int id;
     private String name;
 }

@@ -1,15 +1,12 @@
 package com.thoughtworks.capability.gtb.restfulapidesign.controller;
 
 import com.thoughtworks.capability.gtb.restfulapidesign.controller.dto.TeamUpdateRequestDTO;
-import com.thoughtworks.capability.gtb.restfulapidesign.model.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Team;
-import com.thoughtworks.capability.gtb.restfulapidesign.service.StudentService;
 import com.thoughtworks.capability.gtb.restfulapidesign.service.TeamService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -17,27 +14,23 @@ import java.util.List;
 @Validated
 public class TeamController {
 
-    private final StudentService studentService;
     private final TeamService teamService;
 
-    public TeamController(StudentService studentService, TeamService teamService) {
-        this.studentService = studentService;
+    public TeamController(TeamService teamService) {
         this.teamService = teamService;
     }
 
     @GetMapping("/teams")
-    public List<Team> separateTeam() {
-        List<Student> students = studentService.findAll();
-        Collections.shuffle(students);
-        List<Team> teams = teamService.initTeams();
-        for (int stuIndex = 0; stuIndex < students.size(); stuIndex++) {
-            teams.get(stuIndex % teams.size()).getStudents().add(students.get(stuIndex));
-        }
-        return teams;
+    public List<Team> getAllTeams() {
+        return teamService.findAll();
     }
 
     @PatchMapping("/teams")
-    public Team update(@RequestBody @Valid TeamUpdateRequestDTO teamUpdateRequestDTO) {
-        return teamService.updateTeamById(teamUpdateRequestDTO.getId(), teamUpdateRequestDTO.getName());
+    public List<Team> separateTeams() {return teamService.separateTeams();}
+
+    @PatchMapping("/teams/{id}")
+    public Team update(@PathVariable @Valid int id,
+                       @RequestBody TeamUpdateRequestDTO teamUpdateRequestDTO) {
+        return teamService.updateTeamById(id, teamUpdateRequestDTO.getName());
     }
 }

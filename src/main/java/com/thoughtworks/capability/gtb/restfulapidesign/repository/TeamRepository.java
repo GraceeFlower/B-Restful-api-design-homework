@@ -25,4 +25,8 @@ public class TeamRepository {
         team.setName(name);
         return team;
     }
+
+    public List<Team> findAll() {
+        return teamList;
+    }
 }

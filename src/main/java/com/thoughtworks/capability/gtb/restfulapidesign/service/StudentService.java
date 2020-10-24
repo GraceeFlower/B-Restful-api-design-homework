@@ -40,11 +40,7 @@ public class StudentService {
     }
 
     public List<Student> findByGender(Gender gender) {
-        List<Student> studentList = studentRepository.findByGender(gender);
-        if (studentList.size() == 0) {
-            throw new InvalidStudentException("没有该性别学生！");
-        }
-        return studentList;
+       return studentRepository.findByGender(gender);
     }
 
     public Student findById(int studentId) {
